@@ -1,14 +1,23 @@
-const app = new PIXI.Application();
-app.renderer.background.color = "black";
+//const app = new PIXI.Application();
+const gameContainer = document.querySelector('.game_container');
+
 const ufoList = [];
-document.body.appendChild(app.view);
+const app = new PIXI.Application({
+            width: 800,
+            height: 600,
+            backgroundColor: 0x000000
+        });
+        gameContainer.appendChild(app.view);
+// document.body.appendChild(app.view);
 let lifeSprites = [];
 
 let myLife = 3;
 let myScore = 0;
 
 window.addEventListener("load", loadLifeSprites);
-window.addEventListener("load", loadScoreDisplay);
+const scoreDisplayDiv = document.createElement('div');
+        scoreDisplayDiv.classList.add('score');
+        gameContainer.appendChild(scoreDisplayDiv);
 
 
 
@@ -63,17 +72,15 @@ function removeOneLifeSprite() {
     }
 };
 
-function loadScoreDisplay() {
-    const loadScoreDisplay = document.createElement('div');
-    loadScoreDisplay.classList.add('score');
-    document.body.appendChild(loadScoreDisplay);
-    loadScoreDisplay.innerHTML = myScore.toString();
-}
+// function loadScoreDisplay() {
+//     const loadScoreDisplay = document.createElement('div');
+//     loadScoreDisplay.classList.add('score');
+//     document.body.appendChild(loadScoreDisplay);
+//     loadScoreDisplay.innerHTML = myScore.toString();
+// }
 
 function updateScoreDisplay() {
-    const scoreDisplay = document.querySelector('.score');
-    scoreDisplay.innerHTML = '';
-    scoreDisplay.innerHTML = myScore.toString();
+    scoreDisplayDiv.innerHTML = `${myScore}`;
 }
 
 gameInterval(function () {
