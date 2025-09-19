@@ -1,14 +1,10 @@
-//const app = new PIXI.Application();
+
 const gameContainer = document.querySelector('.game_container');
 
 const ufoList = [];
 const app = new PIXI.Application({
-            width: 800,
-            height: 600,
-            backgroundColor: 0x000000
         });
         gameContainer.appendChild(app.view);
-// document.body.appendChild(app.view);
 let lifeSprites = [];
 
 let myLife = 3;
@@ -18,6 +14,7 @@ window.addEventListener("load", loadLifeSprites);
 const scoreDisplayDiv = document.createElement('div');
         scoreDisplayDiv.classList.add('score');
         gameContainer.appendChild(scoreDisplayDiv);
+        updateScoreDisplay();
 
 
 
@@ -72,13 +69,6 @@ function removeOneLifeSprite() {
     }
 };
 
-// function loadScoreDisplay() {
-//     const loadScoreDisplay = document.createElement('div');
-//     loadScoreDisplay.classList.add('score');
-//     document.body.appendChild(loadScoreDisplay);
-//     loadScoreDisplay.innerHTML = myScore.toString();
-// }
-
 function updateScoreDisplay() {
     scoreDisplayDiv.innerHTML = `${myScore}`;
 }
@@ -92,6 +82,16 @@ gameInterval(function () {
   app.stage.addChild(ufo);
   ufoList.push(ufo);
   flyDown(ufo, random(1, 3));
+
+  for (let i = ufoList.length - 1; i >= 0; i--) {
+      const ufoToCheck = ufoList[i];
+      if (ufoToCheck.y > app.screen.height - 100) {
+          app.stage.removeChild(ufoToCheck);
+          ufoList.splice(i, 1);
+          myScore -= 5;
+          updateScoreDisplay();
+      }
+  }
 
   waitForCollision(ufo, rocket).then(function () {
     myLife -= 1;
