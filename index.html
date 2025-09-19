@@ -6,8 +6,30 @@
     <title>Raketenspiel</title>
 </head>
 <body>
+    <script src="https://cdn.jsdelivr.net/npm/howler@2.2.4/dist/howler.min.js"></script>
     <script src="gameloop.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/pixi.js@7.x/dist/pixi.min.js"></script>
     <script src="app.js"></script>
+    <style>
+        @font-face {
+            font-family: 'VT323';
+            src: url('assets/fonts/VT323/VT323-Regular.ttf');
+        }
+
+        body {
+            display: flex;
+        }
+
+        .score {
+            font-family: 'VT323';
+            font-weight: 900;
+            font-size: 3rem;
+            position: absolute;
+            align-self: flex-start;
+            top: 12%;
+            left: 5%;
+            color: greenyellow;
+        }
+    </style>
 </body>
 </html>
